@@ -5,14 +5,16 @@ body{
     font-family: 'Work Sans', sans-serif;
 }
 img{
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
     margin:auto 50px auto;
+    /* border-radius: 50%; */
 }
 marquee{
     width:1200px;
     margin:100px 150px 100px;
     margin:0;
+    rotate: -3deg;
 }
 p{
     margin:30px;
@@ -26,11 +28,14 @@ a:hover{
     color:#00C4FF;
 }
 .about-skill{
-    padding:50px  50px;
+    padding:50px 50px 150px ;
     width:850px;
     margin: auto;
     font-weight: 900;
+    line-height: 3;
+    rotate: -3deg;
 }
+
 .name{
     font-family: 'Caveat', cursive;
     font-size: 5em;
@@ -38,9 +43,8 @@ a:hover{
     padding-top: 100px;
 }
 .my-pic{
-    width:200px;
-    height:200px;
-    border-radius: 25%;
+    width:250px;
+    height:250px;
     float:right;
     padding:70px 200px;
     
@@ -56,8 +60,9 @@ a:hover{
 }
 .skill-img{
     margin:0px;
-    width:100px;
-    height:100px;
+    width:150px;
+    height:150px;
+    rotate: -3deg;
 }
 .skill-head{
     position: relative;
@@ -71,6 +76,8 @@ a:hover{
     margin:50px;
     padding:50px;
     background-color: #CEE6F3;
+    font-size: 1.15rem;
+    rotate: 3deg;
 }
 .skills-col{
     column-count:4 ;
@@ -79,6 +86,7 @@ a:hover{
     font-size: 3rem;
     font-weight: 900;
     padding:100px;
+    rotate: -3deg;
 }
 .top-col{
     margin-top:0px;
