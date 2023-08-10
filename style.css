@@ -22,7 +22,7 @@ p{
 a{
     text-decoration: none;
     color:#102C57; 
-    padding: 0 3.125rem; 
+    padding: 0 2rem; 
 }
 a:hover{
     color:#00C4FF;
@@ -98,4 +98,9 @@ a:hover{
 }
 .gif{
     border-radius: 50%;
+}
+.link-1{
+    text-align: left;
+    line-height: 2;
+    margin:0;
 }
