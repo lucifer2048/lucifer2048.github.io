@@ -1,9 +1,25 @@
 body{
+    background-image: linear-gradient(to bottom right,#e3e3e5,#6ca4ed,#b2b2b3);
+    
+    text-align: center;
+    color:#102C57;
+    font-family: 'Work Sans', sans-serif;
+    
+ }
+/* body{
     background-color: #D8D9DA;
     text-align: center;
     color:#102C57;
     font-family: 'Work Sans', sans-serif;
-}
+} */
+/* body:hover{
+    background-color:#ffffff ;
+} */
+/* @keyframes example {
+    0% {}
+    50% {background-color:#4FC0D0 ;}
+    100% {background-color:#A1CCD1 ;}
+} */
 img{
     height: 3rem;
     width: 3rem;
@@ -26,7 +42,10 @@ a{
     padding: 0 2rem; 
 }
 a:hover{
-    color:#00C4FF;
+    color:#F8DE22;
+}
+footer{
+    text-align: center;
 }
 .about-skill{
     padding:3.125rem 3.125rem 6.375rem ;
@@ -38,6 +57,7 @@ a:hover{
     max-width: 53.125rem;
 }
 .name{
+    text-align: center;
     font-family: 'Caveat', cursive;
     font-size: 5em;
     font-weight: 900;
@@ -91,6 +111,7 @@ a:hover{
     font-weight: 900;
     padding:4rem 6.25rem 0;
     rotate: -2deg;
+    text-align: center;
 }
 .top-col{
     margin-top:0px;
