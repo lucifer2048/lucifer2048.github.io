@@ -11,10 +11,10 @@ img{
     /* border-radius: 50%; */
 }
 marquee{
-    margin:6.25rem 9.375rem 6.25rem;
+    margin:6.25rem 2.5rem 6.25rem;
     rotate: -3deg;
     min-width:12.5rem;
-    max-width: 75rem;
+    max-width: 80rem;
 }
 p{
     margin:1.875rem;
