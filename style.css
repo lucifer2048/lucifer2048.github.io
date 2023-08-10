@@ -1,3 +1,4 @@
+
 body{
     background-color: #D8D9DA;
     text-align: center;
@@ -7,46 +8,47 @@ body{
 img{
     height: 3rem;
     width: 3rem;
-    margin:auto 50px auto;
+    margin:auto 3.125rem auto;
     /* border-radius: 50%; */
 }
 marquee{
-    width:1200px;
-    margin:100px 150px 100px;
-    margin:0;
+    margin:6.25rem 9.375rem 6.25rem;
     rotate: -3deg;
+    min-width:12.5rem;
+    max-width: 75rem;
 }
 p{
-    margin:30px;
+    margin:1.875rem;
 }
 a{
     text-decoration: none;
     color:#102C57; 
-    padding: 0 50px; 
+    padding: 0 3.125rem; 
 }
 a:hover{
     color:#00C4FF;
 }
 .about-skill{
-    padding:50px 50px 150px ;
-    width:850px;
+    padding:3.125rem 3.125rem 9.375rem ;
+    min-width:12.5rem;
     margin: auto;
     font-weight: 900;
     line-height: 3;
     rotate: -3deg;
+    max-width: 53.125rem;
 }
 
 .name{
     font-family: 'Caveat', cursive;
     font-size: 5em;
     font-weight: 900;
-    padding-top: 100px;
+    padding-top: 6.25rem;
 }
 .my-pic{
-    width:250px;
-    height:250px;
+    width:15.625rem;
+    height:15.625rem;
     float:right;
-    padding:70px 200px;
+    padding:4.375rem 12.5rem;
     
 }
 
@@ -54,38 +56,41 @@ a:hover{
     font-family: 'Ubuntu', sans-serif;
     font-size: 2rem;
     font-weight: 400;
-    width:20px;
-    margin:100px 300px;
+    width:1.25rem;
+    margin:6.25rem 18.75rem;
 
 }
 .skill-img{
     margin:0px;
-    width:150px;
-    height:150px;
+    width:9.375rem;
+    height:9.375rem;
     rotate: -3deg;
 }
 .skill-head{
     position: relative;
-    bottom:20px;
+    bottom:1.25rem;
     font-size: 5em;
     font-weight: 900;
     display:inline;
     font-family: 'Caveat', cursive;
 }
 .skill-sec{
-    margin:50px;
-    padding:50px;
+    margin:3.125rem;
+    padding:3.125rem;
     background-color: #CEE6F3;
     font-size: 1.15rem;
     rotate: 3deg;
 }
 .skills-col{
-    column-count:4 ;
-    column-span: all;
+    column-count: auto ;
+    column-width: 10rem;
+    margin:auto;
+    min-width:12.5rem;
+    max-width: 53.125rem;
     font-family: 'Caveat', cursive;
     font-size: 3rem;
     font-weight: 900;
-    padding:100px;
+    padding:6.25rem;
     rotate: -3deg;
 }
 .top-col{
