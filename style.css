@@ -72,6 +72,7 @@ footer{
     width: 50%;
     box-sizing: border-box;
     padding: 1rem;
+    margin-right: 0;
 }
 .about-skill{
     padding:3.125rem 3.125rem 6.375rem ;
@@ -152,4 +153,8 @@ footer{
     text-align: left;
     line-height: 2;
     margin:0;
+}
+.project-row{
+    rotate: -2deg;
+    text-align: justify;
 }
