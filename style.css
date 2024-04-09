@@ -6,29 +6,14 @@ body{
     font-family: 'Work Sans', sans-serif;
     
  }
-/* body{
-    background-color: #D8D9DA;
-    text-align: center;
-    color:#102C57;
-    font-family: 'Work Sans', sans-serif;
-} */
-/* body:hover{
-    background-color:#ffffff ;
-} */
-/* @keyframes example {
-    0% {}
-    50% {background-color:#4FC0D0 ;}
-    100% {background-color:#A1CCD1 ;}
-} */
+
 img{
     height: 3rem;
     width: 3rem;
     margin:auto 3.125rem auto;
-    /* border-radius: 50%; */
 }
 marquee{
     margin:6.25rem 1rem 6.25rem 4rem;
-    rotate: -2deg;
     min-width:12.5rem;
     max-width: 100rem;
 }
@@ -55,13 +40,11 @@ footer{
   }
   
   .card:hover {
-    rotate: -4deg;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     
   }
   
   .container {
-    /* rotate: -2deg; */
     padding: 20px 16px;
   }
   .flex-container {
@@ -80,7 +63,6 @@ footer{
     margin: auto;
     font-weight: 900;
     line-height: 3;
-    rotate: -2deg;
     max-width: 53.125rem;
 }
 .name{
@@ -118,14 +100,12 @@ footer{
     display:inline;
     font-family: 'Caveat';
     margin: 0 auto;
-    rotate:-2deg;
 }
 .skill-sec{
     margin:3.125rem;
     padding:3.125rem;
     background-color: #CEE6F3;
     font-size: 1.15rem;
-    rotate: 2deg;
 }
 .skills-col{
     column-count: auto ;
@@ -137,7 +117,6 @@ footer{
     font-size: 3rem;
     font-weight: 900;
     padding:4rem 6.25rem 0;
-    rotate: -2deg;
     text-align: center;
 }
 .top-col{
@@ -155,6 +134,5 @@ footer{
     margin:0;
 }
 .project-row{
-    rotate: -2deg;
     text-align: justify;
 }
