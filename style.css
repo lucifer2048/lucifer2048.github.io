@@ -2,7 +2,7 @@
 :root {
     --primary-color: #222121; /* Blue */
     --secondary-color: #fb0202; /* Orange */
-    --font-family: cursive,'Work Sans', sans-serif;
+    --font-family:'Work Sans', sans-serif;
     --font-size: 18px;
   }
   
@@ -63,7 +63,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family:cursive;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   /* Color scheme */
