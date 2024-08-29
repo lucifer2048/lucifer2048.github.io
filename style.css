@@ -455,7 +455,7 @@
 /* Target screens with a max width of 768px ( tablets and smaller ) */
 @media only screen and (max-width: 768px) {
   .end-img {
-    width: 25%; /* Reduce width */
+    width: 35%; /* Reduce width */
     margin: 5px;
     margin: 20px; /* Reduce margin */
   }
@@ -464,8 +464,8 @@
 /* Target screens with a max width of 480px ( mobile phones and smaller ) */
 @media only screen and (max-width: 480px) {
   .end-img {
-    width: 20%; /* Further reduce width */
+    width: 25%; /* Further reduce width */
     margin: 2px;
-    margin: 20px 15px; /* Further reduce margin */
+    margin: 20px 10px; /* Further reduce margin */
   }
 }
