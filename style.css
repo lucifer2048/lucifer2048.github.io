@@ -3,7 +3,7 @@
     --primary-color: #222121; /* Blue */
     --secondary-color: #fb0202; /* Orange */
     --font-family:'Work Sans', sans-serif;
-    --font-size: 18px;
+    --font-size: 20px;
   }
   
   
@@ -40,19 +40,19 @@
   
   /* Typography */
   .name {
-    font-size: 48px;
+    font-size: 50px;
     font-weight: 900;
     font-family: 'Caveat', cursive;
   }
   
   .skill-head {
-    font-size: 45px;
+    font-size: 50px;
     font-weight: 900;
     font-family: 'Caveat', cursive;
   }
   
   .project-head {
-    font-size: 45px;
+    font-size:50px;
     font-weight: 900;
     font-family: 'Caveat', cursive;
   }
@@ -129,25 +129,30 @@
   }
   
   .category {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid var(--primary-color);
+    margin: 10px;
+    padding: 10px;
+    border: 0.5px solid var(--primary-color);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(254, 254, 254);
   }
   
   /* Languages category */
   .languages {
-    color: #34A853; /* Green */
+    color: #28a44a; /* Green */
   }
+
+  
   
   .languages h2 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
+    
   }
   
   .languages .skills-col p {
-    font-size: 18px;
+    font-size: 24px;
+    
   }
   
   /* Web Development category */
@@ -156,26 +161,40 @@
   }
   
   .web-dev h2 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
   }
   
   .web-dev .skills-col p {
-    font-size: 18px;
+    font-size: 24px;
+  }
+
+  /* Other category */
+  .other {
+    color: #dd1111; /* Blue */
+  }
+  
+  .other h2 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .other .skills-col p {
+    font-size: 24px;
   }
   
   /* Databases category */
   .databases {
-    color: #FFC107; /* Orange */
+    color: rgb(247, 223, 8); /* Orange */
   }
   
   .databases h2 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
   }
   
   .databases .skills-col p {
-    font-size: 18px;
+    font-size: 24px;
   }
   
   /* Data Science category */
@@ -184,12 +203,12 @@
   }
   
   .data-science h2 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
   }
   
   .data-science .skills-col p {
-    font-size: 18px;
+    font-size: 24px;
   }
   
   
@@ -215,19 +234,19 @@
   /* Responsive font sizes */
 @media only screen and (max-width: 768px) {
     .category h2 {
-      font-size: 20px;
+      font-size: 24px;
     }
     .category .skills-col p {
-      font-size: 16px;
+      font-size: 20px;
     }
   }
   
   @media only screen and (max-width: 480px) {
     .category h2 {
-      font-size: 18px;
+      font-size: 22px;
     }
     .category .skills-col p {
-      font-size: 14px;
+      font-size: 20px;
     }
   }
   
@@ -414,3 +433,39 @@
     cursor: pointer;
   }
   
+  /* Make end-img images responsive */
+  
+
+.end-img-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.end-img {
+  
+  height: auto; /* Maintain aspect ratio */
+  margin: auto 30px 20px; /* Default margin */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  object-fit: cover; /* Ensure images fit within their bounds */
+}
+
+/* Target screens with a max width of 768px ( tablets and smaller ) */
+@media only screen and (max-width: 768px) {
+  .end-img {
+    width: 25%; /* Reduce width */
+    margin: 5px;
+    margin: 20px; /* Reduce margin */
+  }
+}
+
+/* Target screens with a max width of 480px ( mobile phones and smaller ) */
+@media only screen and (max-width: 480px) {
+  .end-img {
+    width: 20%; /* Further reduce width */
+    margin: 2px;
+    margin: 20px 15px; /* Further reduce margin */
+  }
+}
