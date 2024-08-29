@@ -72,6 +72,7 @@
   
   .skill-head, .name, .project-head {
     color: var(--secondary-color);
+    margin: 20px auto;
   }
   
   footer {
@@ -86,6 +87,7 @@
   marquee {
     background-color: var(--primary-color);
     color: #fff;
+    margin: 40px auto;
   }
   
   /* Skills section */
