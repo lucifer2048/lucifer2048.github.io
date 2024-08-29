@@ -1,138 +1,413 @@
-body{
-    /* background-image: linear-gradient(to bottom right,#e3e3e5,#6ca4ed,#b2b2b3); */
-    
-    text-align: center;
-    color:#102C57;
-    font-family: 'Work Sans', sans-serif;
-    
- }
-
-img{
-    height: 3rem;
-    width: 3rem;
-    margin:auto 3.125rem auto;
-}
-marquee{
-    margin:6.25rem 1rem 6.25rem 4rem;
-    min-width:12.5rem;
-    max-width: 100rem;
-}
-p{
-    margin:1.875rem;
-}
-
-a{
-    text-decoration: none;
-    color:#102C57; 
-    padding: 0 2rem; 
-}
-a:hover{
-    color:#F8DE22;
-}
-footer{
-    text-align: center;
-}
-.card {
-    /* rotate: -2deg; */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 40%;
+/* Variables */
+:root {
+    --primary-color: #222121; /* Blue */
+    --secondary-color: #fb0202; /* Orange */
+    --font-family: 'Work Sans', sans-serif;
+    --font-size: 18px;
   }
   
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    
+  
+  
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   
+  body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    color: var(--primary-color);
+    text-align: center;
+  }
+  
+  /* Responsive layout */
   .container {
-    /* padding: 20px 16px; */
-  }
-  .flex-container {
-    display: flex;
-}
-
-.card {
-    width: 50%;
-    /* box-sizing: border-box; */
-    padding: 1rem;
-    margin-right: 0;
-}
-.about-skill{
-    padding:3.125rem 3.125rem 6.375rem ;
-    min-width:12.5rem;
-    margin: auto;
-    font-weight: 900;
-    line-height: 3;
-    max-width: 53.125rem;
-}
-.name{
-    text-align: center;
-    font-family: 'Caveat', cursive;
-    font-size: 5em;
-    font-weight: 900;
-    padding-top: 6.25rem;
-}
-.my-pic{
-    width:15.625rem;
-    height:15.625rem;
-    float:right;
-    padding:4.375rem 12.5rem;
-    
-}
-.name-row{
-    font-family: 'Work Sans', sans-serif;
-    font-size: 2rem;
-    font-weight: 400;
-    width:1.25rem;
-    margin:6.25rem 18.75rem;
-
-}
-.skill-img{
-    margin:0 3.125rem;
-    width:9.375rem;
-    height:9.375rem;
-}
-.skill-head{
-    position: relative;
-    bottom:1.25rem;
-    font-size: 5em;
-    font-weight: 900;
-    display:inline;
-    font-family: 'Caveat';
+    max-width: 1200px;
     margin: 0 auto;
-}
-.skill-sec{
-    margin:3.125rem;
-    padding:3.125rem;
-    background-color: #CEE6F3;
-    font-size: 1.15rem;
-}
-.skills-col{
-    column-count: auto ;
-    column-width: 11rem;
-    margin:auto;
-    min-width:12.5rem;
-    max-width: 53.125rem;
-    font-family: 'Caveat', cursive;
-    font-size: 3rem;
+    padding: 20px;
+  }
+  
+  /* Image styles */
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  /* Typography */
+  .name {
+    font-size: 48px;
     font-weight: 900;
-    padding:4rem 6.25rem 0;
-    text-align: center;
-}
-.top-col{
-    margin-top:0px;
-}
-.hover-1:hover{
-    color:#00C4FF;
-}
-.gif{
-    border-radius: 50%;
-}
-.link-1{
-    text-align: left;
-    line-height: 2;
-    margin:0;
-}
-.project-row{
+    font-family: 'Caveat', cursive;
+  }
+  
+  .skill-head {
+    font-size: 45px;
+    font-weight: 900;
+    font-family: 'Caveat', cursive;
+  }
+  
+  .project-head {
+    font-size: 45px;
+    font-weight: 900;
+    font-family: 'Caveat', cursive;
+  }
+  
+  /* Center images and text */
+  .intro, .skill-sec, .project-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* Color scheme */
+  body {
+    color: #2196F3;
+  }
+  
+  .skill-head, .name, .project-head {
+    color: var(--secondary-color);
+  }
+  
+  footer {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  footer a {
+    color: var(--secondary-color);
+  }
+  
+  marquee {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  /* Skills section */
+  .skills-col {
+    column-count: 3;
+    column-gap: 20px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .skills-col p {
+    font-size: 2em;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  
+  /* Projects section */
+  .project-row {
+    margin: 20px auto;
+    padding: 20px;
     text-align: justify;
-}
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* Skills section */
+.skills-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .category {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Languages category */
+  .languages {
+    color: #34A853; /* Green */
+  }
+  
+  .languages h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .languages .skills-col p {
+    font-size: 18px;
+  }
+  
+  /* Web Development category */
+  .web-dev {
+    color: #2196F3; /* Blue */
+  }
+  
+  .web-dev h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .web-dev .skills-col p {
+    font-size: 18px;
+  }
+  
+  /* Databases category */
+  .databases {
+    color: #FFC107; /* Orange */
+  }
+  
+  .databases h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .databases .skills-col p {
+    font-size: 18px;
+  }
+  
+  /* Data Science category */
+  .data-science {
+    color: #673AB7; /* Purple */
+  }
+  
+  .data-science h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .data-science .skills-col p {
+    font-size: 18px;
+  }
+  
+  
+  
+  footer a {
+    color: var(--secondary-color);
+    margin: 0 10px;
+  }
+  
+  /* Marquee images */
+  marquee img {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+  }
+  
+  marquee {
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  /* Responsive font sizes */
+@media only screen and (max-width: 768px) {
+    .category h2 {
+      font-size: 20px;
+    }
+    .category .skills-col p {
+      font-size: 16px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .category h2 {
+      font-size: 18px;
+    }
+    .category .skills-col p {
+      font-size: 14px;
+    }
+  }
+  
+  
+  
+  /* Responsive adjustments */
+  @media only screen and (max-width: 992px) {
+    .skills-col {
+      column-count: 2;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .skills-col {
+      column-count: 1;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .name {
+      font-size: 24px;
+    }
+    .skill-head {
+      font-size: 24px;
+    }
+    .skills-col p {
+      font-size: 1.8em;
+    }
+  }
+
+
+/* New styles */
+
+/* Add a loading animation to the website */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Add a scroll-to-top button */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Add a dark mode toggle button */
+  .dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* Add a countdown timer */
+  .countdown-timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Add a modal window */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Add a hover effect to the skills section */
+  .skills-col p:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+  }
+  
+  /* Add a transition effect to the project images */
+  .project-row img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .project-row img:hover {
+    transform: scale(1.1);
+  }
+  
+  
+
+/* Add a background image to the intro section */
+.intro {
+    background-image: url('(link unavailable)');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  
+  /* Add a hover effect to the skills section */
+  .skills-col p:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+  }
+  
+  /* Add a transition effect to the project images */
+  .project-row img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .project-row img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Add a footer border */
+  footer {
+    border-top: 1px solid var(--secondary-color);
+  }
+  
+  /* New ideas */
+  
+  /* Add a loading animation to the website */
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Add a scroll-to-top button */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Add a dark mode toggle button */
+  .dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
