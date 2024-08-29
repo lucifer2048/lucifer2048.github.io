@@ -2,7 +2,7 @@
 :root {
     --primary-color: #222121; /* Blue */
     --secondary-color: #fb0202; /* Orange */
-    --font-family: 'Work Sans', sans-serif;
+    --font-family: cursive,'Work Sans', sans-serif;
     --font-size: 18px;
   }
   
@@ -63,6 +63,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family:cursive;
   }
   
   /* Color scheme */
@@ -206,7 +207,7 @@
   }
   
   marquee {
-    padding: 20px;
+    padding: 10px;
     background-color: var(--primary-color);
     color: #fff;
   }
@@ -241,16 +242,16 @@
   
   @media only screen and (max-width: 768px) {
     .skills-col {
-      column-count: 1;
+      column-count: 2;
     }
   }
   
   @media only screen and (max-width: 480px) {
     .name {
-      font-size: 24px;
+      font-size: 32px;
     }
     .skill-head {
-      font-size: 24px;
+      font-size: 32px;
     }
     .skills-col p {
       font-size: 1.8em;
