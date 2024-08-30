@@ -85,11 +85,7 @@
     color: var(--secondary-color);
   }
   
-  marquee {
-    background-color: var(--primary-color);
-    color: #fff;
-    margin: 40px auto;
-  }
+
   
   /* Skills section */
   .skills-col {
@@ -222,12 +218,13 @@
   marquee img {
     width: 50px;
     height: 50px;
-    margin: 10px;
+    padding:2px;
   }
   
   marquee {
-    padding: 10px;
-    background-color: var(--primary-color);
+    /* padding: 10px; */
+    margin:40px auto;
+    background-color: transparent;
     color: #fff;
   }
   
@@ -469,3 +466,16 @@
     margin: 20px 10px; /* Further reduce margin */
   }
 }
+
+.more-img{
+  width:40px;
+  height:40px;
+  padding:5px;
+  margin: 10px;
+
+}
+.project-name {
+  display: flex;
+  align-items: center;
+}
+
