@@ -212,6 +212,7 @@
   footer a {
     color: var(--secondary-color);
     margin: 0 10px;
+    text-decoration: none;
   }
   
   /* Marquee images */
