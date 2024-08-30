@@ -364,12 +364,12 @@
   
 
 /* Add a background image to the intro section */
-.intro {
+/* .intro {
     background-image: url('(link unavailable)');
     background-size: cover;
     background-position: center;
     height: 100vh;
-  }
+  } */
   
   /* Add a hover effect to the skills section */
   .skills-col p:hover {
@@ -481,4 +481,11 @@
   display: flex;
   align-items: center;
 }
+
+
+
+
+
+
+
 
