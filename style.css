@@ -65,7 +65,9 @@
     flex-direction: column;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
-  
+  .subcat{
+    font-family: "Caveat";
+  }
   /* Color scheme */
   body {
     color: #2196F3;
@@ -135,13 +137,13 @@
   
   /* Languages category */
   .languages {
-    color: #28a44a; /* Green */
+    color: #38b000;
   }
 
   
   
   .languages h2 {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
     
   }
@@ -153,11 +155,11 @@
   
   /* Web Development category */
   .web-dev {
-    color: #2196F3; /* Blue */
+    color: #2196F3;
   }
   
   .web-dev h2 {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
   }
   
@@ -167,11 +169,11 @@
 
   /* Other category */
   .other {
-    color: #dd1111; /* Blue */
+    color: #fb6f92; 
   }
   
   .other h2 {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
   }
   
@@ -181,11 +183,11 @@
   
   /* Databases category */
   .databases {
-    color: rgb(247, 223, 8); /* Orange */
+    color:#ffb703; /* Orange */
   }
   
   .databases h2 {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
   }
   
@@ -199,7 +201,7 @@
   }
   
   .data-science h2 {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
   }
   
@@ -241,7 +243,7 @@
   
   @media only screen and (max-width: 480px) {
     .category h2 {
-      font-size: 22px;
+      font-size: 30px;
     }
     .category .skills-col p {
       font-size: 20px;
@@ -268,7 +270,7 @@
       font-size: 32px;
     }
     .skill-head {
-      font-size: 32px;
+      font-size: 34px;
     }
     .skills-col p {
       font-size: 1.8em;
