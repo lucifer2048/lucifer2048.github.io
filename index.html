@@ -774,6 +774,11 @@
       }
     });
 
+    // Add click event to scroll to top
+    document.querySelector('.scroll-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     // Modal Functions
     function showModal() {
       document.getElementById('about-modal').style.display = 'flex';
