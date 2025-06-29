@@ -1,189 +1,823 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prathyush S Panicker</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Prathyush S Panicker - Portfolio</title>
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Pacifico&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    :root {
+      --primary-color: #1f2937;
+      --secondary-color: #3b82f6;
+      --accent-color: #f97316;
+      --background-light: #f9fafb;
+      --background-dark: #111827;
+      --text-dark: #e5e7eb;
+      --card-bg-light: rgba(255, 255, 255, 0.9);
+      --card-bg-dark: rgba(31, 41, 55, 0.9);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--primary-color);
+      background-color: var(--background-light);
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+    }
+
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      background-color: var(--background-light);
+      transition: background-color 0.3s;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header.dark-mode {
+      background-color: var(--background-dark);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0.75rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        background-color: var(--background-light);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+      }
+
+      body.dark-mode .nav-menu {
+        background-color: var(--background-dark);
+      }
+
+      .nav-menu.open {
+        display: flex;
+        max-height: 500px;
+        opacity: 1;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .hamburger span {
+      background-color: var(--text-dark);
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 50%;
+      height: 4px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .skill-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 1rem 0;
+    }
+
+    .skill-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .skill-card {
+      flex: 0 0 auto;
+      width: 280px;
+      margin-right: 1.5rem;
+      background: var(--card-bg-light);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      scroll-snap-align: start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-card,
+    .work-card,
+    .education-card {
+      background: var(--card-bg-light);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body.dark-mode .skill-card,
+    body.dark-mode .project-card,
+    body.dark-mode .work-card,
+    body.dark-mode .education-card {
+      background: var(--card-bg-dark);
+    }
+
+    .project-card:hover,
+    .work-card:hover,
+    .education-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    .scroll-to-top:hover {
+      background-color: var(--accent-color);
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    .dark-mode-toggle:hover {
+      background-color: var(--accent-color);
+    }
+
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: var(--card-bg-light);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      text-align: left;
+      animation: slideIn 0.5s ease-out;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    body.dark-mode .modal-content {
+      background: var(--card-bg-dark);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .modal-close {
+      color: var(--text-dark);
+    }
+
+    .modal-close:hover {
+      color: var(--accent-color);
+    }
+
+    .profile-photo-container {
+      position: relative;
+      display: inline-block;
+      padding: 8px;
+      background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-photo-container:hover {
+      transform: rotate(360deg);
+    }
+
+    .profile-photo {
+      border: 4px solid var(--background-light);
+      border-radius: 50%;
+      transition: border-color 0.3s ease;
+    }
+
+    body.dark-mode .profile-photo {
+      border-color: var(--background-dark);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-link {
+        padding: 0.75rem 1rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .skill-carousel {
+        width: 100%;
+      }
+
+      .skill-card {
+        width: 240px;
+      }
+
+      .modal-content {
+        width: 95%;
+        max-height: 85vh;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .skill-card {
+        width: 200px;
+      }
+
+      .modal-content {
+        width: 90%;
+        max-height: 80vh;
+        padding: 1rem;
+      }
+
+      .profile-photo-container {
+        padding: 6px;
+      }
+
+      .profile-photo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div  class="container">
-    <div  class="intro">
-      <h1 class="name">Hey!<br>I am Prathyush S Panicker.<br><br>A WEB Developer and AIML Enthusiast.</h1>
-      <img class="my-pic" src="https://cdn-icons-png.flaticon.com/256/4105/4105448.png" alt="my-photo">
+  <!-- Loading Animation -->
+  <div class="loading">
+    <div class="flex flex-col items-center">
+      <svg class="w-16 h-16 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8 8 8 0 01-8-8z"></path>
+      </svg>
+      <p class="text-white mt-4 text-lg">Loading Portfolio...</p>
     </div>
-
-    <div style="background-color: #f8f9fa;"  class="skill-sec">
-      <div style="font-size: 24px; padding: 20px; " class="about-skill">
-        A Computer Science graduate with a passion for merging technology and real-world applications. Excited about the potential of AI to revolutionize industries. Academic and hands-on experience as a full-stack developer. Actively seeking opportunities to make a meaningful impact through innovative projects.
-
-        <br>I also love Sports, watching playing everything and ofcourse Music.
-      </div>
-      <div style="rotate: -3deg;">
-        <img class="skill-img" src="https://cdn-icons-png.flaticon.com/512/9759/9759528.png" alt="skills-img">
-        <h1 class="skill-head">SKILLS</h1>
-
-      </div>
-      <div class="skills-categories">
-        <div class="category languages">
-          <h2 class="subcat">LANGUAGES</h2>
-          <div class="skills-col">
-            <p class="hover-1">Python</p>
-            <p class="hover-1">JAVA</p>
-            <p class="hover-1">C language</p>
-            <p class="hover-1">Javascript</p>
-            <p class="hover-1">English</p>
-            <p class="hover-1">Hindi</p>
-            <p class="hover-1">Malayalam</p>
-            <p class="hover-1">Kannada</p>
-          </div>
-        </div>
-        <div class="category web-dev">
-          <h2 class="subcat">WEB DEVELOPMENT</h2>
-          <div class="skills-col">
-            <p class="hover-1">HTML/CSS</p>
-            <p class="hover-1">React</p>
-            <p class="hover-1">React Native</p>
-            <p class="hover-1">Node JS</p>
-            <p class="hover-1">Express JS</p>
-            <p class="hover-1">TailwindCSS</p>
-          </div>
-        </div>
-        <div class="category databases">
-          <h2 class="subcat">DATABASES</h2>
-          <div class="skills-col">
-            <p class="hover-1">MySQL</p>
-            <p class="hover-1">MongoDB</p>
-          </div>
-        </div>
-        <div class="category data-science">
-          <h2 class="subcat">DATA SCIENCE</h2>
-          <div class="skills-col">
-            <p class="hover-1">Pandas</p>
-            <p class="hover-1">MatplotLib</p>
-            <p class="hover-1">Machine Learning</p>
-            <p class="hover-1">Deep Learning</p>
-            <p class="hover-1">NLP</p>
-            <p class="hover-1">R</p>
-          </div>
-        </div>
-        <div class="category other">
-          <h2 class="subcat">OTHERS</h2>
-          <div class="skills-col">
-            <p class="hover-1">VSCODE</p>
-            <p class="hover-1">Git/Github</p>
-            <p class="hover-1">Windows</p>
-            <p class="hover-1">Android Studio</p>
-            <p class="hover-1">Problem solver</p>
-            <p class="hover-1">Team Player</p>
-            
-          </div>
-        </div>
-      </div>
-      
-    
-      <marquee behavior="alternate">
-        <img src="https://cdn-icons-png.flaticon.com/128/8277/8277654.png">
-        <img src="https://cdn-icons-png.flaticon.com/512/15713/15713436.png">
-        <img src="https://cdn-icons-png.flaticon.com/512/1240/1240970.png">
-        <img  src="https://cdn-icons-png.flaticon.com/512/2103/2103832.png">
-        <img src="https://cdn-icons-png.flaticon.com/128/4248/4248217.png">
-        <img class="gif" src="https://cdn-icons-gif.flaticon.com/8722/8722703.gif">
-        <img src="https://cdn-icons-png.flaticon.com/128/1199/1199124.png">
-        <img class="gif" src="https://cdn-icons-gif.flaticon.com/6454/6454035.gif">
-        <img src="https://cdn-icons-png.flaticon.com/128/1199/1199128.png">
-        <img src="https://cdn-icons-png.flaticon.com/512/4926/4926625.png">
-        <img class="gif" src="https://cdn-icons-gif.flaticon.com/11694/11694834.gif">
-      </marquee>
-      <div style="rotate: -2deg;">
-        <h1 class="skill-head">PROJECTS</h1>
-      </div>
-
-      <div class="project-row">
-        <h2 class="project-name">
-          
-          "COMMUNITY HEALTH APP WITH STEPCOUNTER (Presifit)" 
-          <a href="https://github.com/lucifer2048/Presifit"><img class="more-img" src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" >
-          </a></h2><br>
-        
-        <p>
-          ● Led a collegiate team in the development of a health application featuring a step counter utilizing React Native and the MERN (MongoDB, Express.js, React.js, Node.js) stack.<br><br>
-          ● Leveraging React Native's cross-platform capabilities, the application ensured optimal performance across various devices while delivering a smooth user experience.<br><br>
-          ● Oversaw the entire project lifecycle, focusing on modern and user-centric design.<br><br>
-          ● The project showcased our collective expertise in software development and our commitment to delivering impactful solutions.<br><br>
-        </p>
-      </div>
-
-      <div class="project-row">
-        <h2 class="project-name">
-          "SPORTS WINNER PREDICTION AND NEWS AGGREGATOR (ML)"
-          <a href="https://github.com/lucifer2048/WinnerPrediction-ML-model-with-Streamlit-Web-app"><img class="more-img" src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" >
-          </a>
-        </h2><br>
-        <p>
-          ● Web application using Streamlit, News API, and ML (Pandas, NumPy,sklearn)
-          for IPL and Football winner prediction.<br><br>
-          ● Real-time match predictions based on historical data and team performance.<br><br>
-          ● Integrated News API for the latest sports news from various categories and enhancing user
-          interaction.
-        </p>
-      </div>
-
-      <div class="project-row">
-        <h2 class="project-name">
-          "INTEGRATED GUI WITH TKINTER AND MYSQL INTEGRATION (PYTHON)"
-          <a href="https://github.com/lucifer2048/Integrated-GUI-with-tkinter"><img class="more-img" src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" >
-          </a></h2><br>
-        <p>
-          ● Led the development of a GUI using Tkinter and MySQL integration.<br><br>
-          ● Designed intuitive sign-up/login processes for enhanced user interaction and data management.<br><br>
-          ● Collaborated across disciplines,conducted testing, and documented the project, showcasing proficiency in software development and user experience.
-        </p>
-      </div>
-      
-        <div style="rotate: -2deg;">
-          <h1 class="skill-head">RESEARCH PAPERS</h1>
-        </div>
-        <div class="project-row">
-          <h2 class="project-name">"Presifit- An app which connects Personal Health Influencers through Social Media" <a href="https://ijcrt.org/viewfull.php?&p_id=IJCRT2401066"><img class="more-img" src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" ></a></h2><br>
-          <p> This innovative application unveils a revolutionary API for the Interactive Health and Lifestyle (IHL) platform, focusing on fostering user engagement. The API empowers individuals to establish health challenges within their social circles, providing a gamified experience with incentives and badges strategically placed to drive sustained participation and goal accomplishment. The application underscores the API's versatility, facilitating dynamic challenges across various health-related activities. Implemented in React Native, the platform ensures seamless navigation, allowing users to participate effortlessly in challenges related to fitness goals, habits, and health vitals.</p>
-        </div>
-        <div class="project-row">
-          <h2 class="project-name">"Generative Artificial Intelligence in Medical Field" <a href="https://ijcrt.org/viewfull.php?&p_id=IJCRT2405109"><img class="more-img" src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" ></a></h2><br>
-          <p> Generative AI transforms healthcare by enhancing medical imaging, accelerating drug discovery, and enabling personalized medicine. Challenges include ethics, biases, and interpretability. Future directions involve customized models and regulatory frameworks. Responsible adoption is crucial for realizing generative AI's potential. In the realm of medical imaging, generative AI reconstructs high-resolution images from low-quality scans, aiding radiologists in precise diagnoses. </p>
-        </div>
-      </div>
-    
-    
-  </div>
-  
-  
-  <div class="end-img-container">
-
-  <img class="end-img" src="https://cdn-icons-png.flaticon.com/512/7546/7546335.png" alt="end-img">
-  <img class="end-img" src=" https://cdn-icons-png.flaticon.com/512/7546/7546314.png" alt="end-img">
-  <img class="end-img" src="https://cdn-icons-png.flaticon.com/512/7546/7546359.png" alt="end-img">
   </div>
 
-  <footer>
-    <p>
-      <a href="https://open.spotify.com/track/7fzHQizxTqy8wTXwlrgPQQ?si=RyWMSY20QaWSV_9AXD7nqQ&utm_source=copy-link">On
-        repeat</a>
-      <a href="mailto:panickerprathyush20@gamil.com">Email</a>
-      <a href="https://www.linkedin.com/in/prathyush-s-panicker-8345b517b/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/lucifer2048" target="_blank">Github</a>
-      <a href="Prathyush_S_Panicker_Resume.pdf" target="_blank">Resume</a>
-    </p>
-    <p style="margin: 20px;">©
-      <script type="text/javascript">{ document.write(new Date().getFullYear()) };</script> Prathyush S Panicker
-    </p>
-  </footer>
+  <!-- Header -->
+  <header class="shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Prathyush S Panicker</h1>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-menu flex items-center space-x-6">
+        <button class="nav-link text-gray-600 dark:text-gray-200" onclick="showModal()">About Me</button>
+        <a href="https://github.com/lucifer2048" target="_blank" class="nav-link text-gray-600 dark:text-gray-200">GitHub</a>
+        <a href="https://www.linkedin.com/in/prathyush-s-panicker-8345b517b/" target="_blank" class="nav-link text-gray-600 dark:text-gray-200">LinkedIn</a>
+        <a href="mailto:panickerprathyush20@gmail.com" class="nav-link text-gray-600 dark:text-gray-200">Email</a>
+        <a href="Prathyush_S_Panicker_Resume_V2.pdf" target="_blank" class="nav-link text-gray-600 dark:text-gray-200">Resume</a>
+        <a href="https://open.spotify.com/track/1Tp4xz7ybZ3dtQc6yBs3m4?si=a93a59f5aa0147bb" class="nav-link text-gray-600 dark:text-gray-200">On Repeat</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24">
+    <!-- Intro Section -->
+    <section class="container mx-auto px-6 py-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-pulse">Hey, I'm Prathyush!</h1>
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Turning coffee into code and dreams into deployments ☕💻<br>
+        — a Software Engineer with a passion for building scalable full-stack applications and experimenting with AI agents. If you’re looking for someone who can tackle complex problems, ship features with velocity, and bring a little personality to the terminal — let’s connect.
+      </p>
+      <div class="profile-photo-container mt-6">
+        <img src="https://cdn-icons-png.flaticon.com/256/4105/4105448.png" alt="profile-photo" class="profile-photo w-32 h-32">
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="container mx-auto px-6 py-12">
+      <h2 class="section-title text-center">Skills</h2>
+      <div class="skill-carousel">
+        <div class="skill-card">
+          <h3 class="text-xl font-semibold text-green-600 dark:text-green-400 mb-4">Languages</h3>
+          <ul class="text-gray-600 dark:text-gray-200 space-y-2">
+            <li>Python</li>
+            <li>Java</li>
+            <li>C</li>
+            <li>JavaScript</li>
+            <li>SQL</li>
+            <li>English</li>
+            <li>Hindi</li>
+            <li>Malayalam</li>
+            <li>Kannada</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Web Development</h3>
+          <ul class="text-gray-600 dark:text-gray-200 space-y-2">
+            <li>HTML/CSS</li>
+            <li>React</li>
+            <li>React Native</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Tailwind CSS</li>
+            <li>Flask</li>
+            <li>FastAPI</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="text-xl font-semibold text-yellow-600 dark:text-yellow-400 mb-4">Databases</h3>
+          <ul class="text-gray-600 dark:text-gray-200 space-y-2">
+            <li>MySQL</li>
+            <li>MongoDB</li>
+            <li>Supabase (PostgreSQL)</li>
+            <li>SQLAlchemy</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-4">Data Science & AI</h3>
+          <ul class="text-gray-600 dark:text-gray-200 space-y-2">
+            <li>AI Agents</li>
+            <li>Pandas</li>
+            <li>Matplotlib</li>
+            <li>NumPy</li>
+            <li>scikit-learn</li>
+            <li>Machine Learning</li>
+            <li>Deep Learning</li>
+            <li>NLP</li>
+            <li>R</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="text-xl font-semibold text-pink-600 dark:text-pink-400 mb-4">DevOps & Others</h3>
+          <ul class="text-gray-600 dark:text-gray-200 space-y-2">
+            <li>VS Code</li>
+            <li>Git/GitHub</li>
+            <li>Windows</li>
+            <li>Android Studio</li>
+            <li>Docker</li>
+            <li>Kubernetes</li>
+            <li>Jenkins</li>
+            <li>Nginx</li>
+            <li>AWS</li>
+            <li>Playwright</li>
+            <li>Postman</li>
+            <li>Problem Solving</li>
+            <li>Team Collaboration</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="container mx-auto px-6 py-12">
+      <h2 class="section-title text-center">Work Experience</h2>
+      <div class="grid grid-cols-1 gap-6">
+        <div class="work-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Engineer – TATA Elxsi Limited, Bengaluru, India</h3>
+          <p class="text-gray-600 dark:text-gray-200">Dec 2024 – Present</p>
+          <ul class="text-gray-600 dark:text-gray-200 list-disc list-inside mt-2 space-y-2">
+            <li>Contributed to a PoC project by integrating frontend, backend, and AI agents using Model Context Protocol.</li>
+            <li>Built a browser automation agent with Claude Sonnet 3.7 and Playwright.</li>
+            <li>Took ownership of DevOps tasks: Dockerized multiple services, deployed the system locally using Kubernetes (Minikube) and Ingress, and configured Nginx for traffic management.</li>
+            <li>Set up and maintained a Jenkins CI/CD pipeline to automate Gerrit pulls, Docker image builds, and pod deployments.</li>
+          </ul>
+        </div>
+        <div class="work-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Freelance Full Stack Developer</h3>
+          <p class="text-gray-600 dark:text-gray-200">June 2024 – Dec 2024</p>
+          <ul class="text-gray-600 dark:text-gray-200 list-disc list-inside mt-2 space-y-2">
+            <li>Developed a mutual funds website using MERN stack with Supabase (PostgreSQL), React for frontend, and Node.js/Express for backend APIs; tested using Postman.</li>
+            <li>Built an internal eyecare web app with a billing system, an admin dashboard, and a WhatsApp-integrated membership feature using automation APIs.</li>
+            <li>Delivered secure, modular, and user-friendly solutions tailored to business needs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="container mx-auto px-6 py-12">
+      <h2 class="section-title text-center">Education</h2>
+      <div class="education-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2">B.Tech in Computer Science and Engineering (AI & ML)</h3>
+        <p class="text-gray-600 dark:text-gray-200">Presidency University, Bengaluru | June 2024 | CGPA: 8.2</p>
+        <p class="text-gray-600 dark:text-gray-200 mt-2">Relevant Coursework: Data Structures, Algorithms, Machine Learning, Deep Learning, Web Development, Cloud Computing</p>
+        <h3 class="text-xl font-semibold mt-4">12th Grade (Science)</h3>
+        <p class="text-gray-600 dark:text-gray-200">88%</p>
+        <h3 class="text-xl font-semibold mt-4">10th Grade</h3>
+        <p class="text-gray-600 dark:text-gray-200">95%</p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="container mx-auto px-6 py-12">
+      <h2 class="section-title text-center">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Community Health App with Step Counter (Presifit)
+            <a href="https://github.com/lucifer2048/Presifit" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="github" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            - Led a team to develop a health app using React Native and MERN stack, featuring a step counter.<br>
+            - Ensured cross-platform compatibility and a smooth user experience.<br>
+            - Managed the project lifecycle with a focus on user-centric design.<br>
+            - Demonstrated expertise in full-stack development and impactful solutions.
+          </p>
+        </div>
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Sports Winner Prediction and News Aggregator (ML)
+            <a href="https://github.com/lucifer2048/WinnerPrediction-ML-model-with-Streamlit-Web-app" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="github" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            - Built a web app using Streamlit, News API, Pandas, NumPy, and scikit-learn for IPL and football winner predictions.<br>
+            - Provided real-time match predictions based on historical data.<br>
+            - Integrated News API for up-to-date sports news, enhancing user engagement.
+          </p>
+        </div>
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Python CLI Weather App
+            <a href="https://github.com/lucifer2048/Weather-App" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="github" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            - Developed a CLI weather app with secure bcrypt authentication.<br>
+            - Implemented MySQL-backed history tracking for user interactions.<br>
+            - Focused on efficient data handling and user-friendly command-line interface.
+          </p>
+        </div>
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Integrated GUI with Tkinter and MySQL
+            <a href="https://github.com/lucifer2048/Integrated-GUI-with-tkinter" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="github" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            - Created a GUI application using Tkinter with MySQL integration.<br>
+            - Designed intuitive sign-up/login processes, improving data handling efficiency by 30%.<br>
+            - Collaborated across teams, conducted testing, and documented the project.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Papers Section -->
+    <section class="container mx-auto px-6 py-12">
+      <h2 class="section-title text-center">Research Papers</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Presifit: Connecting Personal Health Influencers
+            <a href="https://ijcrt.org/viewfull.php?&p_id=IJCRT2401066" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="link" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            Developed an API for an Interactive Health and Lifestyle platform using React Native, enabling users to create and participate in health challenges. The app promotes engagement through gamified incentives and badges, supporting fitness goals and health vitals tracking.
+          </p>
+        </div>
+        <div class="project-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2 flex items-center">
+            Generative AI in Medical Field
+            <a href="https://ijcrt.org/viewfull.php?&p_id=IJCRT2405109" target="_blank" class="ml-2">
+              <img src="https://cdn-icons-png.flaticon.com/512/6159/6159260.png" alt="link" class="w-6 h-6">
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-200">
+            Explored generative AI's impact on healthcare, including medical imaging, drug discovery, and personalized medicine. Addressed challenges like ethics and biases, proposing customized models and regulatory frameworks for responsible adoption.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+  <!-- Dark Mode Toggle -->
+  <button class="dark-mode-toggle">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal" id="about-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h2 class="text-2xl font-bold text-var(--secondary-color) mb-4">About Me</h2>
+      <p class="text-gray-600 dark:text-gray-200 mb-4">
+        I'm Prathyush S Panicker, a Software Engineer with a passion for transforming ideas into robust, scalable solutions. With a foundation in computer science and hands-on experience across full-stack development, DevOps, and AI experimentation, I thrive at the intersection of backend logic, frontend finesse, and intelligent automation.
+      </p>
+      <p class="text-gray-600 dark:text-gray-200 mb-4">
+        Currently working at TATA Elxsi, I’ve been part of a high-impact PoC team that integrated AI agents like Claude Sonnet 3.7 using the Model Context Protocol. My work spans building browser automation flows with Playwright, containerizing services with Docker, deploying them using Kubernetes with Ingress, and implementing CI/CD pipelines through Jenkins. I believe in building systems that are not only functional but production-grade, well-documented, and designed with maintainability in mind.
+      </p>
+      <p class="text-gray-600 dark:text-gray-200 mb-4">
+        Before this, I delivered freelance projects that catered to real-world client needs — including a mutual fund platform using the MERN stack with Supabase/PostgreSQL, and an eyecare web app complete with billing automation and WhatsApp integration. These projects strengthened my ability to work autonomously, adapt quickly, and communicate clearly — qualities that are essential in fast-paced dev environments.
+      </p>
+      <p class="text-gray-600 dark:text-gray-200 mb-4">
+        Beyond code, I bring curiosity, creativity, and a collaborative spirit to every team I’m part of. I see software engineering as a blend of art and architecture — and I strive to build not just features, but thoughtful user experiences. I’m deeply interested in AI integration, clean API design, and system reliability — with a long-term goal of contributing to impactful, intelligent systems that scale.
+      </p>
+      <p class="text-gray-600 dark:text-gray-200">
+        Outside work, I find joy and motivation in football (forever a Manchester United fan), anime philosophy (One Piece taught me more about grit than any textbook), and a genuine obsession with learning — whether it's a new framework, a DevOps tool, or just a better way to write Python. In short: I write code that ships, build systems that scale, and bring energy that elevates teams. If you're looking for an engineer who blends technical depth with creativity, and performance with personality — let's connect.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Loading Animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.loading').classList.add('hidden');
+      }, 1000);
+    });
+
+    // Dark Mode Toggle
+    document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.querySelector('header').classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Load Dark Mode Preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      document.querySelector('header').classList.add('dark-mode');
+    }
+
+    // Scroll to Top
+    window.addEventListener('scroll', () => {
+      const scrollButton = document.querySelector('.scroll-to-top');
+      if (window.scrollY > 300) {
+        scrollButton.style.display = 'block';
+      } else {
+        scrollButton.style.display = 'none';
+      }
+    });
+
+    // Modal Functions
+    function showModal() {
+      document.getElementById('about-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('about-modal').style.display = 'none';
+    }
+
+    // Hamburger Menu Toggle
+    function toggleMenu() {
+      const menu = document.querySelector('.nav-menu');
+      const hamburger = document.querySelector('.hamburger');
+      menu.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'flex';
+      } else {
+        menu.style.display = 'none';
+      }
+    }
+
+    // Ensure hamburger is clickable on load for small screens
+    window.addEventListener('resize', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      if (window.innerWidth <= 768) {
+        hamburger.style.display = 'flex';
+        menu.style.display = 'none';
+      } else {
+        hamburger.style.display = 'none';
+        menu.style.display = 'flex';
+      }
+    });
+
+    // Initial check on page load
+    window.addEventListener('load', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      if (window.innerWidth <= 768) {
+        hamburger.style.display = 'flex';
+        menu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
-
 </html>
