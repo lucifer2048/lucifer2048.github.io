@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ── DESIGN TOKENS ───────────────────────────────────────── */
+@theme {
+  --color-paper: #ededE4;
+  --color-paper-dim: #e2e2d6;
+  --color-ink: #121210;
+  --color-ink-soft: #53534a;
+  --color-stamp: #ff3b1f;
+  --color-marker: #e7ff3d;
+  --color-line: #c9c7ba;
+  --color-console: #0e0e0c;
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --font-body: "IBM Plex Sans", Arial, sans-serif;
+}
+
+/* ── BASE ─────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-marker);
+  color: var(--color-ink);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-stamp);
+  outline-offset: 2px;
+}
+
+/* ── BLUEPRINT GRID BACKGROUND ───────────────────────────── */
+.grid-paper {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--color-line) 0px,
+      var(--color-line) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--color-line) 0px,
+      var(--color-line) 1px,
+      transparent 1px,
+      transparent 64px
+    );
+  background-color: var(--color-paper);
+}
+
+/* ── HARD / BRUTALIST SHADOW UTILITIES ───────────────────── */
+.shadow-hard {
+  box-shadow: 8px 8px 0 0 var(--color-ink);
+}
+.shadow-hard-sm {
+  box-shadow: 5px 5px 0 0 var(--color-ink);
+}
+.shadow-hard-stamp {
+  box-shadow: 6px 6px 0 0 var(--color-stamp);
+}
+
+/* ── CUSTOM CURSOR (desktop only, see CustomCursor.tsx) ──── */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+  body.custom-cursor-active a,
+  body.custom-cursor-active button {
+    cursor: none;
+  }
+}
+
+/* ── MARQUEE ──────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 60s linear infinite;
+}
+
+/* ── BLINK (status dots) ──────────────────────────────────── */
+@keyframes blink-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.blink {
+  animation: blink-dot 1.6s step-end infinite;
+}
+
+/* ── GLITCH JITTER (used sparingly, on hover only) ───────── */
+@keyframes glitch-jitter {
+  0% {
+    transform: translate(0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+    clip-path: inset(10% 0 60% 0);
+  }
+  40% {
+    transform: translate(2px, -1px);
+    clip-path: inset(60% 0 5% 0);
+  }
+  60% {
+    transform: translate(-1px, 0);
+    clip-path: inset(20% 0 40% 0);
+  }
+  100% {
+    transform: translate(0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+.group:hover .glitch-on-hover {
+  animation: glitch-jitter 0.35s steps(2, jump-none) 1;
+}
+
+/* ── REDUCED MOTION ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .blink {
+    animation: none;
+    opacity: 1;
+  }
+  .group:hover .glitch-on-hover {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
