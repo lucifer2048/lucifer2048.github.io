@@ -27,10 +27,10 @@ export const profile = {
 };
 
 export const socials = [
-  { label: "GITHUB", href: "https://github.com/prathyushspanicker" },
-  { label: "LINKEDIN", href: "https://linkedin.com/in/prathyush-s-panicker-8345b517b" },
-  { label: "LEETCODE", href: "https://leetcode.com/u/prathyushspanicker" },
-  { label: "HACKERRANK", href: "https://hackerrank.com/prathyushspanicker" },
+  { label: "GITHUB", href: "https://github.com/lucifer2048" },
+  { label: "LINKEDIN", href: "https://www.linkedin.com/in/prathyush-s-panicker-8345b517b" },
+  { label: "LEETCODE", href: "https://leetcode.com/u/lucifer2048/" },
+  { label: "HACKERRANK", href: "https://www.hackerrank.com/profile/panickerprathyu1" },
   { label: "EMAIL", href: "mailto:panickerprathyush20@gmail.com" },
 ];
 

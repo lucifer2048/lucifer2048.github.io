@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: `${profile.name} — ${profile.role}`,
   description: profile.tagline,
   referrer: "strict-origin-when-cross-origin",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/icon.svg",
+  },
 };
 
 const contentSecurityPolicy = [
