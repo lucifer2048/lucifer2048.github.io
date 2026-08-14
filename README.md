@@ -1,88 +1,90 @@
-# Portfolio — Brutalist / Raw / Experimental
+# Prathyush S Panicker — Portfolio
 
-A from-scratch Next.js portfolio built around one idea: instead of hiding
-how the page works, it exposes it. A live "debug HUD" in the corner shows
-your real cursor position, scroll depth, current section, and an
-auto-generated interaction log — the raw machinery of the page, on display,
-which is what brutalism is actually about.
+A high-performance, responsive portfolio website built with Next.js App Router, React 19, TypeScript, and Tailwind CSS. Designed around a modern **Dark Obsidian & Crimson Red Bento Grid** aesthetic featuring an interactive system telemetry HUD and an AI assistant named Kep.
 
-## Stack
+---
 
-- **Next.js 16** (App Router, TypeScript)
-- **Tailwind CSS v4** (CSS-first theme tokens in `app/globals.css`)
-- **Framer Motion** (scroll reveals, count-up stats, project card transitions)
-- Zero other dependencies. No component library, no animation-as-a-service.
+## Code Architecture & Project Structure
 
-## Run it
+The project follows senior engineering best practices with strict separation of concerns, single-file content configuration, typed interfaces, and zero unnecessary external UI dependencies.
+
+```
+├── app/                      # Next.js App Router Pages & Global Styles
+│   ├── layout.tsx            # Global Root Layout & Metadata SEO
+│   ├── page.tsx              # Main Page Composition
+│   ├── globals.css           # Custom CSS Design System Tokens & Animations
+│   └── icon.svg              # Favicon Asset
+│
+├── components/               # Modular & Reusable UI Components
+│   ├── Nav.tsx               # Top Responsive Floating Header
+│   ├── Hero.tsx              # Full-Width Masterpiece Artwork Canvas
+│   ├── Marquee.tsx           # 4 Engineering Focus Cards + Tech Drawer
+│   ├── About.tsx             # 12-Column Bento Grid, Stats & Enterprise Banner
+│   ├── Experience.tsx        # Work History (Tata Elxsi & Freelance) & Education
+│   ├── Projects.tsx          # Production Bento Work Cards + Architecture Deep Dive Modal
+│   ├── Stack.tsx             # Technical Capabilities & Tooling Inventory
+│   ├── Contact.tsx           # Interactive Form, Direct Email Copy & Socials
+│   ├── Footer.tsx            # Copyright & Back-to-Top Navigation
+│   ├── PortfolioAgent.tsx    # Interactive Kep AI Chatbot Assistant
+│   ├── DebugHUD.tsx          # Real-Time Telemetry Monitoring Panel
+│   ├── CustomCursor.tsx      # Precision Crosshair Pointer
+│   ├── Preloader.tsx         # Multilingual Greeting Loader
+│   └── CountUp.tsx           # Animated Numerical Counters
+│
+├── lib/                      # Data Layer & Configuration (Single Source of Truth)
+│   └── config.ts             # Profile, Bio, Stats, Projects, Stack & Social Config
+│
+├── public/                   # Static Production Assets
+│   ├── hero_background.jpg   # Serene Hero Artwork Image
+│   └── *.docx                # Resume Document File
+│
+├── next.config.ts            # Next.js Static Export Configuration
+├── tsconfig.json             # TypeScript Compiler Config & Path Aliases (@/*)
+└── package.json              # Dependencies & Production Scripts
+```
+
+---
+
+## ⚡ 1-File Content Customization
+
+All personal data, work history, projects, stats, tech stack inventory, and social links are centralized in **[`lib/config.ts`](file:///Users/prathyushspanicker/Desktop/Projects/Personal/Portfolio/lib/config.ts)**:
+
+```ts
+// Example: Modifying project or bio configuration in lib/config.ts
+export const profile = {
+  name: "PRATHYUSH S PANICKER",
+  role: "AI FULLSTACK / SOFTWARE ENGINEER",
+  location: "BENGALURU, IN",
+  email: "panickerprathyush20@gmail.com",
+  ...
+};
+```
+
+Any new developer can update text, projects, or experience items by editing `lib/config.ts` without touching React component markup or layout logic.
+
+---
+
+## Run Locally
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Start local development server
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open `http://localhost:3000` in your browser.
 
-> **First build needs internet access.** The display/mono/body fonts
-> (Anton, IBM Plex Mono, IBM Plex Sans) load via `next/font/google`, which
-> fetches them at build time. This is normal for any Next.js project using
-> `next/font` — nothing to configure, it just needs to reach
-> `fonts.googleapis.com` once.
+---
 
-## Customize everything from one file
+## 📦 Production Static Build
 
-Open **`lib/config.ts`**. That's it — name, role, bio, stats, projects,
-tech stack, and social links all live there. Nothing else needs touching
-unless you want to change layout or animation behavior.
+To build the static HTML export:
 
-A few things to swap before you ship:
-
-- `profile.resumeUrl` — points at the sanitized public résumé in `public/`.
-- `profile.email` — used by the client-only `mailto:` contact form.
-- `socials` — point these at your real GitHub/LinkedIn/X profiles.
-- `projects` — replace with your real work. Each has a `status` of
-  `RUNNING | DEPLOYED | EXPERIMENT | ARCHIVED` which drives the badge color.
-
-## The signature element
-
-`components/DebugHUD.tsx` is the one place worth understanding before you
-touch it. It listens to real mouse, scroll, and `IntersectionObserver`
-events and renders them live. Other components (`Projects.tsx`,
-`Contact.tsx`) push lines into its log via a tiny event bus:
-
-```ts
-import { logToHud } from "@/components/DebugHUD";
-logToHud("did a thing");
+```bash
+npm run build
 ```
 
-Use that anywhere you want the HUD to narrate an interaction.
+This generates an optimized static export bundle in `out/`, ready to deploy to GitHub Pages or any static CDN host.
 
-## Contact form and security
-
-The contact form intentionally opens the visitor's local email client with a
-length-limited, encoded `mailto:` link. The static site has no public form API,
-database, authentication system, or server secrets. If a hosted form provider
-is added later, review its spam controls, data retention, domain restrictions,
-and secret-handling model before deployment.
-
-## Accessibility / motion
-
-- All interactive elements have a visible focus ring (the orange outline).
-- `prefers-reduced-motion` is respected throughout: the scramble-text
-  intro, marquee, glitch-jitter, and count-up all fall back to static or
-  instant states.
-- The custom crosshair cursor only activates on devices with a fine
-  pointer (`hover: hover` + `pointer: fine`); touch devices keep their
-  native cursor.
-
-## Deploying to GitHub Pages
-
-The project uses Next.js static export and the pinned workflow in
-`.github/workflows/deploy-pages.yml`. Push the source to the `main` branch of
-the `lucifer2048.github.io` repository, then select **GitHub Actions** under
-**Settings → Pages → Build and deployment**. The workflow installs exactly the
-locked dependencies without lifecycle scripts, audits them, builds `out/`, and
-deploys that artifact with least-privilege permissions.
-
-In **Settings → Pages**, also enable **Enforce HTTPS**. Keep Dependabot and
-repository vulnerability alerts enabled, review its pull requests, protect the
-`main` branch, and require the Pages workflow to pass before merging changes.

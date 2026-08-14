@@ -5,172 +5,123 @@ import { experience, education, certifications, strengths } from "@/lib/config";
 
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      data-hud-section="experience"
-      className="border-b-2 border-ink px-5 py-20 sm:px-8 sm:py-28"
-    >
-      <div className="mx-auto max-w-[1400px]">
-        {/* Title */}
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-4">
-          <h2 className="font-display text-5xl sm:text-7xl">EXPERIENCE_RECORD</h2>
-          <p className="font-mono text-xs tracking-widest text-ink-soft sm:text-sm">
-            JOBS({experience.length}) EDU({education.length}) CERTS({certifications.length})
+    <section id="experience" data-hud-section="experience" className="relative px-3.5 sm:px-6 py-16 sm:py-32 bg-[#0A0A0C]">
+
+      <div className="mx-auto max-w-6xl">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 sm:mb-14 text-center"
+        >
+          <span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            Career Path
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-5xl font-bold tracking-tight text-white">
+            Work{" "}
+            <span className="font-serif italic font-normal text-[#FFD1D6]">
+              experience
+            </span>{" "}
+            & achievements.
+          </h2>
+          <p className="mt-3 text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
+            A track record of taking complex 0→1 AI initiatives and fullstack applications to production.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid Layout */}
-        <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-          
-          {/* Left Column: Work Experience */}
-          <div className="space-y-8">
-            <h3 className="font-mono text-xs font-semibold tracking-widest text-stamp mb-4">
-              {"// PROFESSIONAL_HISTORY"}
-            </h3>
-            
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-12">
+          {/* Left Column: Work Experience (Col Span 8) */}
+          <div className="lg:col-span-8 space-y-6">
             {experience.map((exp, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.45, delay: idx * 0.1 }}
-                className="shadow-hard-sm border-2 border-ink bg-paper"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group rounded-3xl border border-white/10 bg-[#111114]/90 p-5 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-red-500/30 hover:shadow-2xl shadow-xl"
               >
-                {/* Header Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink bg-ink px-4 py-2.5 font-mono text-xs tracking-wider text-paper sm:text-sm">
-                  <span>{exp.role.toUpperCase()} @ {exp.company.toUpperCase()}</span>
-                  <span className="text-marker font-semibold">{exp.period}</span>
-                </div>
-                
-                {/* Content */}
-                <div className="p-5 sm:p-6 space-y-4">
-                  <div className="font-mono text-[10px] text-ink-soft tracking-wider">
-                    LOCATION: {exp.location.toUpperCase()}
+                {/* Header */}
+                <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-5 mb-5">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-red-400 transition-colors">
+                      {exp.role}
+                    </h3>
+                    <p className="text-sm font-semibold text-red-400 mt-1">
+                      {exp.company} • <span className="text-zinc-400 font-normal">{exp.location}</span>
+                    </p>
                   </div>
-                  
-                  <ul className="space-y-2.5 font-mono text-xs leading-relaxed text-ink sm:text-sm">
-                    {exp.bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className="flex gap-2 items-start">
-                        <span className="text-stamp select-none">›</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1 text-xs font-mono font-medium text-red-300">
+                    {exp.period}
+                  </span>
                 </div>
+
+                {/* Bullets */}
+                <ul className="space-y-3 text-sm text-zinc-300 leading-relaxed">
+                  {exp.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex items-start gap-2.5">
+                      <span className="text-red-500 font-bold flex-shrink-0 text-base">✦</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
 
-          {/* Right Column: Education, certifications, and strengths */}
-          <div className="space-y-8">
-            
-            {/* Education Box */}
-            <div className="space-y-4">
-              <h3 className="font-mono text-xs font-semibold tracking-widest text-stamp">
-                {"// EDUCATION_METRICS"}
-              </h3>
-              
+          {/* Right Column: Education, Certifications & Strengths (Col Span 4) */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Education Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="rounded-3xl border border-white/10 bg-[#111114]/90 p-6 backdrop-blur-md hover:border-red-500/30 transition-all shadow-xl"
+            >
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-3">
+                Education & Distinction
+              </span>
               {education.map((edu, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.45 }}
-                  className="shadow-hard-sm border-2 border-ink bg-paper p-5 sm:p-6 space-y-4"
-                >
-                  <div>
-                    <h4 className="font-display text-xl leading-snug sm:text-2xl text-ink">
-                      {edu.degree}
-                    </h4>
-                    <p className="font-mono text-xs text-stamp mt-1">
-                      {edu.institution} | {edu.period}
-                    </p>
+                <div key={idx} className="space-y-3">
+                  <h4 className="text-lg font-bold text-white">{edu.degree}</h4>
+                  <p className="text-xs text-zinc-300">{edu.institution} • {edu.period}</p>
+                  <div className="inline-block rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs text-red-300 font-semibold">
+                    ★ {edu.details}
                   </div>
-                  
-                  <div className="border-t border-ink/20 pt-3">
-                    <p className="font-mono text-xs leading-relaxed text-ink-soft">
-                      {edu.details}
-                    </p>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <span className="font-mono text-[10px] tracking-widest text-ink-soft block">{"// COURSEWORK:"}</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {edu.coursework.map((course, cIdx) => (
-                        <span
-                          key={cIdx}
-                          className="border border-ink bg-paper-dim px-2 py-0.5 font-mono text-[10px] tracking-wide"
-                        >
-                          {course}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </motion.div>
 
-            {/* Certifications and strengths grid */}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-              
-              {/* Certifications */}
-              <div className="space-y-4">
-                <h3 className="font-mono text-xs font-semibold tracking-widest text-stamp">
-                  {"// CERTIFICATIONS"}
-                </h3>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.45, delay: 0.1 }}
-                  className="shadow-hard-sm border-2 border-ink bg-paper p-5"
-                >
-                  <ul className="space-y-3 font-mono text-xs">
-                    {certifications.map((cert, idx) => (
-                      <li key={idx} className="border-b border-ink/10 pb-2 last:border-b-0 last:pb-0">
-                        <div className="font-semibold text-ink">{cert.name}</div>
-                        <div className="text-[10px] text-stamp mt-0.5">
-                          ISSUED_BY: {cert.issuer.toUpperCase()} · {cert.period.toUpperCase()}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-
-              {/* Strengths */}
-              <div className="space-y-4">
-                <h3 className="font-mono text-xs font-semibold tracking-widest text-stamp">
-                  {"// STRENGTHS"}
-                </h3>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.45, delay: 0.2 }}
-                  className="shadow-hard-sm border-2 border-ink bg-paper p-5"
-                >
-                  <ul className="space-y-3 font-mono text-xs">
-                    {strengths.map((strength, idx) => (
-                      <li key={idx} className="flex gap-2 items-start last:border-b-0">
-                        <span className="text-stamp">▪</span>
-                        <span>{strength}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-
-            </div>
-
+            {/* Certifications Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="rounded-3xl border border-white/10 bg-[#111114]/90 p-6 backdrop-blur-md hover:border-red-500/30 transition-all shadow-xl"
+            >
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-3">
+                Certifications
+              </span>
+              <ul className="space-y-3">
+                {certifications.map((cert, idx) => (
+                  <li key={idx} className="border-b border-white/5 pb-2.5 last:border-b-0 last:pb-0">
+                    <p className="text-xs font-semibold text-white">{cert.name}</p>
+                    <p className="text-[11px] font-mono text-zinc-400 mt-0.5">
+                      {cert.issuer} • {cert.period}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
+

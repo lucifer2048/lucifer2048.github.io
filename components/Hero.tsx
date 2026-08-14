@@ -1,73 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ScrambleText from "./ScrambleText";
+import Image from "next/image";
 import { profile } from "@/lib/config";
 
 export default function Hero() {
-  const [lineA, lineB] = profile.role.split(" / ");
-
   return (
-    <section
-      id="hero"
-      data-hud-section="hero"
-      className="grid-paper relative flex min-h-screen flex-col justify-center overflow-hidden px-5 pt-24 pb-16 sm:px-8"
-    >
-      {/* corner annotations — blueprint-style */}
-      <span className="absolute left-5 top-20 hidden font-mono text-[11px] text-ink-soft sm:block sm:left-8">
-        {`// production ai systems — ${profile.location}`}
-      </span>
-      <span className="absolute right-5 top-20 hidden font-mono text-[11px] text-ink-soft sm:block sm:right-8">
-        {"<ai-fullstack/> v3.0.0"}
-      </span>
+    <section id="hero" data-hud-section="hero" className="relative px-2 sm:px-4 lg:px-6 pt-3 sm:pt-4 pb-6 sm:pb-10 bg-[#0A0A0C]">
 
-      <div className="mx-auto w-full max-w-[1400px]">
-        <p className="mb-4 font-mono text-xs tracking-widest text-stamp sm:text-sm">
-          SYSTEM.BOOT() — {profile.name}
-        </p>
+      {/* Outer Rounded Hero Canvas Container */}
+      <div className="relative mx-auto max-w-[1720px] min-h-[82vh] sm:min-h-[88vh] md:min-h-[92vh] rounded-[1.75rem] sm:rounded-[3rem] overflow-hidden border border-white/10 flex flex-col justify-end pt-20 pb-7 px-5 sm:p-10 lg:p-12 shadow-2xl">
+        {/* Background Artwork Image */}
+        <Image
+          src="/hero_background.jpg"
+          alt="Prathyush S Panicker Hero Artwork"
+          fill
+          priority
+          className="object-cover object-[22%_center] lg:object-center brightness-[0.78] contrast-[1.05]"
+        />
 
-        <h1 className="font-display leading-[0.92] tracking-tight">
-          <span className="block text-[18vw] sm:text-[12vw] lg:text-[9rem]">
-            <ScrambleText text={lineA} />
-          </span>
-          <span className="-mt-2 block -rotate-1 text-[15vw] text-stamp sm:text-[10vw] lg:text-[7.5rem]">
-            <ScrambleText text={lineB} delay={250} />
-          </span>
-        </h1>
+        {/* Gradient Overlay for Crisp Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-[#0A0A0C]/60 to-black/30 pointer-events-none" />
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-          className="mt-8 max-w-xl font-mono text-sm leading-relaxed text-ink-soft sm:text-base"
-        >
-          {profile.tagline}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.5 }}
-          className="mt-10 flex flex-wrap gap-4"
-        >
-          <a
-            href="#work"
-            className="shadow-hard-stamp -rotate-1 border-2 border-ink bg-ink px-5 py-3 font-mono text-xs font-semibold tracking-widest text-paper transition-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none sm:text-sm"
+        {/* Content Overlay */}
+        <div className="relative z-10 w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 sm:gap-8 lg:gap-12 mt-auto">
+          {/* Left: Giant Display Name */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
           >
-            VIEW_PROJECTS ↓
-          </a>
-          <a
-            href={profile.resumeUrl}
-            className="shadow-hard-sm rotate-1 border-2 border-ink bg-paper px-5 py-3 font-mono text-xs font-semibold tracking-widest text-ink transition-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none sm:text-sm"
-          >
-            RESUME.DOCX ↗
-          </a>
-        </motion.div>
-      </div>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-bold text-white tracking-tight leading-[0.95] drop-shadow-2xl break-words">
+              Prathyush<span className="text-red-500 font-serif italic ml-1">*</span>
+            </h1>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-widest text-ink-soft">
-        scroll ↓
+          </motion.div>
+
+          {/* Right: Tagline & CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="flex flex-col items-start max-w-full sm:max-w-md space-y-4 sm:space-y-5"
+          >
+            <p className="text-zinc-200 text-xs sm:text-sm md:text-base font-normal leading-relaxed drop-shadow-md">
+              {profile.tagline}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 rounded-full bg-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-black transition-all hover:bg-zinc-200 hover:scale-[1.02] shadow-xl"
+              >
+                <span>Get in touch</span>
+                <div className="flex h-6 sm:h-7 w-6 sm:w-7 items-center justify-center rounded-full bg-black text-white transition-transform group-hover:translate-x-0.5">
+                  <svg
+                    className="w-3 sm:w-3.5 h-3 sm:h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.5}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+

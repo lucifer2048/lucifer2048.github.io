@@ -3,17 +3,20 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { profile, socials } from "@/lib/config";
-import { logToHud } from "./DebugHUD";
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // This portfolio is hosted as a static site. Keeping contact client-only
-    // means there is no public API, database, or server secret to attack.
     const safeName = form.name.trim().replace(/[\r\n]+/g, " ").slice(0, 80);
     const safeEmail = form.email.trim().replace(/[\r\n]+/g, " ").slice(0, 254);
     const safeMessage = form.message.trim().slice(0, 2000);
@@ -22,7 +25,6 @@ export default function Contact() {
       `${safeMessage}\n\n— ${safeName} (${safeEmail})`,
     );
 
-    logToHud("opening local email client");
     setSent(true);
     window.location.assign(
       `mailto:${profile.email}?subject=${subject}&body=${body}`,
@@ -30,37 +32,57 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      data-hud-section="contact"
-      className="border-b-2 border-ink px-5 py-20 sm:px-8 sm:py-28"
-    >
-      <div className="mx-auto max-w-[1400px]">
-        <h2 className="mb-12 font-display text-5xl sm:text-7xl">
-          GET_IN_TOUCH
-        </h2>
+    <section id="contact" data-hud-section="contact" className="relative px-3.5 sm:px-6 py-16 sm:py-32 bg-[#0A0A0C]">
 
+      <div className="mx-auto max-w-6xl">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid gap-0 border-2 border-ink sm:grid-cols-[1.4fr_1fr]"
+          className="mb-10 sm:mb-14 text-center"
         >
-          <div className="border-b-2 border-ink p-6 sm:border-b-0 sm:border-r-2 sm:p-10">
-            <p className="mb-6 font-mono text-sm text-ink-soft">
-              guest@portfolio:~$ contact --send
-            </p>
+          <span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            Get In Touch
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-5xl font-bold tracking-tight text-white">
+            Let&apos;s build something{" "}
+            <span className="font-serif italic font-normal text-[#FFD1D6]">
+              extraordinary
+            </span>{" "}
+            together.
+          </h2>
+          <p className="mt-3 text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
+            Open for fullstack AI roles, custom agent development, or technical consultation.
+          </p>
+        </motion.div>
 
+        {/* Contact Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+          {/* Left: Interactive Form (Col Span 7) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-7 rounded-3xl border border-white/10 bg-[#111114]/90 p-5 sm:p-8 backdrop-blur-md hover:border-red-500/30 transition-all shadow-xl"
+          >
             {sent ? (
-              <p className="font-mono text-lg text-stamp">
-                ✓ MAIL_CLIENT_OPENED — talk soon.
-              </p>
+              <div className="py-12 text-center">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20 text-red-400 mb-4">
+                  ✓
+                </div>
+                <h3 className="text-xl font-bold text-white">Email Client Launched!</h3>
+                <p className="text-zinc-400 text-sm mt-2">
+                  Thank you for reaching out. I&apos;ll get back to you shortly.
+                </p>
+              </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="mb-1 block font-mono text-xs text-ink-soft">
-                    {"// name"}
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
+                    YOUR NAME
                   </label>
                   <input
                     required
@@ -70,31 +92,32 @@ export default function Contact() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, name: e.target.value }))
                     }
-                    className="w-full border-2 border-ink bg-paper px-3 py-2.5 font-mono text-sm outline-none"
-                    placeholder="jane_doe"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:border-red-500 focus:outline-none transition-colors"
+                    placeholder="Jane Doe"
                   />
                 </div>
+
                 <div>
-                  <label className="mb-1 block font-mono text-xs text-ink-soft">
-                    {"// email"}
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
+                    YOUR EMAIL
                   </label>
                   <input
                     required
                     type="email"
                     autoComplete="email"
-                    inputMode="email"
                     maxLength={254}
                     value={form.email}
                     onChange={(e) =>
                       setForm((f) => ({ ...f, email: e.target.value }))
                     }
-                    className="w-full border-2 border-ink bg-paper px-3 py-2.5 font-mono text-sm outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:border-red-500 focus:outline-none transition-colors"
                     placeholder="jane@company.com"
                   />
                 </div>
+
                 <div>
-                  <label className="mb-1 block font-mono text-xs text-ink-soft">
-                    {"// message"}
+                  <label className="block text-xs font-mono text-zinc-400 mb-2">
+                    MESSAGE
                   </label>
                   <textarea
                     required
@@ -105,37 +128,74 @@ export default function Contact() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, message: e.target.value }))
                     }
-                    className="w-full border-2 border-ink bg-paper px-3 py-2.5 font-mono text-sm outline-none"
-                    placeholder="let's build something..."
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:border-red-500 focus:outline-none transition-colors"
+                    placeholder="Tell me about your project or opportunity..."
                   />
                 </div>
+
                 <button
                   type="submit"
-                  className="shadow-hard-stamp border-2 border-ink bg-ink px-6 py-3 font-mono text-xs font-semibold tracking-widest text-paper transition-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none sm:text-sm"
+                  className="w-full rounded-full bg-white px-7 py-4 text-sm sm:text-base font-semibold text-black transition-all hover:bg-zinc-200 active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px] shadow-lg shadow-white/5"
                 >
-                  OPEN_EMAIL ↵
+                  <span>Send Message via Email</span>
+                  <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col justify-center gap-3 p-6 sm:p-10">
-            <p className="mb-2 font-mono text-xs tracking-widest text-ink-soft">
-              FIND_ME_ELSEWHERE
-            </p>
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                className="shadow-hard-sm flex items-center justify-between border-2 border-ink px-4 py-3 font-mono text-xs font-semibold tracking-widest transition-transform hover:-translate-y-0.5 hover:bg-ink hover:text-paper"
-              >
-                {s.label}
-                <span aria-hidden>↗</span>
-              </a>
-            ))}
-          </div>
-        </motion.div>
+          {/* Right: Direct Email Copy & Social Badges (Col Span 5) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-5 flex flex-col justify-between gap-6"
+          >
+            {/* Quick Email Copy Card */}
+            <div className="rounded-3xl border border-white/10 bg-[#111114]/90 p-5 sm:p-6 backdrop-blur-md hover:border-red-500/30 transition-all shadow-xl">
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-3">
+                Direct Email
+              </span>
+              <div className="flex items-center justify-between gap-2 rounded-2xl border border-white/10 bg-white/5 p-3.5">
+                <span className="text-xs sm:text-sm font-mono text-white truncate">
+                  {profile.email}
+                </span>
+                <button
+                  onClick={handleCopyEmail}
+                  className="rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2 text-xs font-mono font-semibold text-red-300 hover:bg-red-500/20 active:scale-95 transition-all flex-shrink-0 min-h-[38px]"
+                >
+                  {copied ? "Copied! ✓" : "Copy"}
+                </button>
+              </div>
+            </div>
+
+            {/* Social Links Cards */}
+            <div className="rounded-3xl border border-white/10 bg-[#111114]/90 p-5 sm:p-6 backdrop-blur-md hover:border-red-500/30 transition-all flex-1 shadow-xl">
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-4">
+                Connect Online
+              </span>
+              <div className="space-y-2.5">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-xs font-semibold text-white hover:bg-white/10 hover:border-red-500/30 active:scale-[0.98] transition-all min-h-[44px]"
+                  >
+                    <span>{s.label}</span>
+                    <span className="text-red-400">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+

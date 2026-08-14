@@ -7,50 +7,63 @@ export default function Stack() {
   const categories = Object.entries(stack);
 
   return (
-    <section
-      id="stack"
-      data-hud-section="stack"
-      className="border-b-2 border-ink px-5 py-20 sm:px-8 sm:py-28"
-    >
-      <div className="mx-auto max-w-[1400px]">
-        <h2 className="mb-12 font-display text-5xl sm:text-7xl">TOOLBOX</h2>
+    <section id="stack" data-hud-section="stack" className="relative px-3.5 sm:px-6 py-16 sm:py-32 bg-[#0A0A0C]">
 
+      <div className="mx-auto max-w-6xl">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="shadow-hard border-2 border-ink bg-console p-6 font-mono text-sm leading-relaxed text-paper sm:p-10 sm:text-base"
+          className="mb-10 sm:mb-14 text-center"
         >
-          <p className="mb-3 text-paper/50">
-            guest@portfolio:~$ ls -la ./stack
-          </p>
-          {categories.map(([cat, tools], ci) => (
-            <div key={cat} className="mb-1">
-              <p className="text-marker">
-                ./{cat}
-              </p>
-              {tools.map((tool, ti) => {
-                const isLast = ti === tools.length - 1;
-                return (
-                  <p key={tool} className="pl-2">
-                    <span className="text-paper/40">
-                      {isLast ? "└─ " : "├─ "}
-                    </span>
-                    {tool}
-                  </p>
-                );
-              })}
-              {ci < categories.length - 1 && (
-                <p className="text-paper/40">│</p>
-              )}
-            </div>
-          ))}
-          <p className="mt-3 text-paper/50">
-            guest@portfolio:~$ <span className="blink">▮</span>
+          <span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            Toolbox
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-5xl font-bold tracking-tight text-white">
+            Technical{" "}
+            <span className="font-serif italic font-normal text-[#FFD1D6]">
+              capabilities
+            </span>{" "}
+            & stack.
+          </h2>
+          <p className="mt-3 text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
+            Languages, frameworks, AI libraries, and cloud infrastructure battle-tested in production.
           </p>
         </motion.div>
+
+        {/* Stack Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {categories.map(([cat, tools], ci) => (
+            <motion.div
+              key={cat}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: ci * 0.08 }}
+              className="rounded-3xl border border-white/10 bg-[#111114]/90 p-6 sm:p-7 backdrop-blur-md hover:border-red-500/30 transition-all duration-300 shadow-xl flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-xs font-mono text-red-400 uppercase tracking-wider block mb-4">
+                  ./{cat.replace(/-/g, "_")}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {tools.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-200"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+

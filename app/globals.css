@@ -1,91 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
-/* ── DESIGN TOKENS ───────────────────────────────────────── */
+/* ── DESIGN TOKENS (PREMIUM RED & BLACK) ──────────────────── */
 @theme {
-  --color-paper: #ededE4;
-  --color-paper-dim: #e2e2d6;
-  --color-ink: #121210;
-  --color-ink-soft: #53534a;
-  --color-stamp: #ff3b1f;
-  --color-marker: #e7ff3d;
-  --color-line: #c9c7ba;
-  --color-console: #0e0e0c;
+  --color-bg-dark: #0a0a0c;
+  --color-card-dark: #111114;
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-card-border-hover: rgba(255, 46, 77, 0.3);
+  --color-accent-red: #ff2e4d;
+  --color-accent-serif: #ffd1d6;
 
-  --font-display: "Anton", "Arial Narrow", sans-serif;
-  --font-mono: "IBM Plex Mono", "Courier New", monospace;
-  --font-body: "IBM Plex Sans", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-/* ── BASE ─────────────────────────────────────────────────── */
+/* ── BASE & ROOT ──────────────────────────────────────────── */
 * {
   box-sizing: border-box;
 }
 
-html {
+html, body, #root {
+  background-color: #0a0a0c;
+  color: #f4f4f5;
+  font-family: var(--font-sans);
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-body);
+  margin: 0;
   overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: var(--color-marker);
-  color: var(--color-ink);
+  background-color: rgba(255, 46, 77, 0.3);
+  color: #ffffff;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--color-stamp);
-  outline-offset: 2px;
+  outline: 2px solid #ff2e4d;
+  outline-offset: 4px;
 }
 
-/* ── BLUEPRINT GRID BACKGROUND ───────────────────────────── */
-.grid-paper {
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      var(--color-line) 0px,
-      var(--color-line) 1px,
-      transparent 1px,
-      transparent 64px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      var(--color-line) 0px,
-      var(--color-line) 1px,
-      transparent 1px,
-      transparent 64px
-    );
-  background-color: var(--color-paper);
-}
-
-/* ── HARD / BRUTALIST SHADOW UTILITIES ───────────────────── */
-.shadow-hard {
-  box-shadow: 8px 8px 0 0 var(--color-ink);
-}
-.shadow-hard-sm {
-  box-shadow: 5px 5px 0 0 var(--color-ink);
-}
-.shadow-hard-stamp {
-  box-shadow: 6px 6px 0 0 var(--color-stamp);
-}
-
-/* ── CUSTOM CURSOR (desktop only, see CustomCursor.tsx) ──── */
-@media (hover: hover) and (pointer: fine) {
-  body.custom-cursor-active {
-    cursor: none;
+/* ── MOBILE UX & TOUCH OPTIMIZATIONS ────────────────────── */
+@media (max-width: 768px) {
+  /* Prevent iOS Safari auto-zoom on form focus */
+  input, textarea, select {
+    font-size: 16px !important;
   }
-  body.custom-cursor-active a,
-  body.custom-cursor-active button {
-    cursor: none;
+}
+
+/* Touch feedback for mobile buttons */
+@media (hover: none) {
+  button:active, a:active {
+    opacity: 0.85;
+    transform: scale(0.98);
   }
+}
+
+/* ── AMBIENT GRID & RED GLOW BACKGROUND ────────────────────── */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-radial-glow-red {
+  background-image: radial-gradient(circle at center, rgba(255, 46, 77, 0.04), transparent 70%);
+}
+
+/* ── GLASSMORPHISM & CARD STYLING ─────────────────────────── */
+.glass-card {
+  background-color: rgba(17, 17, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 46, 77, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(255, 46, 77, 0.15);
+}
+
+.glass-pill {
+  background-color: rgba(20, 20, 24, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
 }
 
 /* ── MARQUEE ──────────────────────────────────────────────── */
@@ -97,51 +107,69 @@ textarea:focus-visible {
     transform: translateX(-50%);
   }
 }
+
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 60s linear infinite;
+  animation: marquee-scroll 45s linear infinite;
 }
 
-/* ── BLINK (status dots) ──────────────────────────────────── */
-@keyframes blink-dot {
-  0%,
-  100% {
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── PULSING RED DOT ──────────────────────────────────────── */
+@keyframes pulse-red {
+  0%, 100% {
     opacity: 1;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.25;
+    opacity: 0.5;
+    transform: scale(1.2);
   }
-}
-.blink {
-  animation: blink-dot 1.6s step-end infinite;
 }
 
-/* ── GLITCH JITTER (used sparingly, on hover only) ───────── */
-@keyframes glitch-jitter {
-  0% {
-    transform: translate(0, 0);
-    clip-path: inset(0 0 0 0);
-  }
-  20% {
-    transform: translate(-2px, 1px);
-    clip-path: inset(10% 0 60% 0);
-  }
-  40% {
-    transform: translate(2px, -1px);
-    clip-path: inset(60% 0 5% 0);
-  }
-  60% {
-    transform: translate(-1px, 0);
-    clip-path: inset(20% 0 40% 0);
-  }
-  100% {
-    transform: translate(0, 0);
-    clip-path: inset(0 0 0 0);
-  }
+.animate-pulse-red {
+  animation: pulse-red 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
-.group:hover .glitch-on-hover {
-  animation: glitch-jitter 0.35s steps(2, jump-none) 1;
+
+/* ── CUSTOM SCROLLBAR ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff2e4d;
+}
+
+/* ── HIDE SCROLLBAR UTILITY ───────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── CUSTOM CURSOR ADJUSTMENTS ────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+  body.custom-cursor-active a,
+  body.custom-cursor-active button {
+    cursor: none;
+  }
 }
 
 /* ── REDUCED MOTION ───────────────────────────────────────── */
@@ -150,13 +178,6 @@ textarea:focus-visible {
     scroll-behavior: auto;
   }
   .marquee-track {
-    animation: none;
-  }
-  .blink {
-    animation: none;
-    opacity: 1;
-  }
-  .group:hover .glitch-on-hover {
     animation: none;
   }
   * {

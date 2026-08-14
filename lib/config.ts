@@ -9,8 +9,10 @@ export const profile = {
   shortName: "PSP",
   role: "AI FULLSTACK / SOFTWARE ENGINEER",
   location: "BENGALURU, IN",
+  availableStatus: "AVAILABLE FOR FULLSTACK & AI ROLES",
   tagline:
-    "I build production AI agents, MCP tooling, and the React/FastAPI systems that ship them — with hands-on ownership from product and APIs through DevOps.",
+    "Architecting production AI agents, Model Context Protocol (MCP) tooling, and high-performance fullstack systems.",
+
   status: "BUILDING",
   email: "panickerprathyush20@gmail.com",
   resumeUrl: "/Prathyush_Panicker_AI_Fullstack_Developer.docx",
@@ -21,7 +23,7 @@ export const profile = {
   stats: [
     { label: "REGISTERED_USERS", value: 160, suffix: "+" },
     { label: "CANDIDATES_REACHED", value: 1000, suffix: "+" },
-    { label: "CONCURRENT_PROJECTS", value: 4, suffix: " MAX" },
+    { label: "PRODUCTION_DEPLOYMENTS", value: 6, suffix: "+" },
     { label: "DAYS_AT_TATA_ELXSI", value: 0, suffix: "+", baseDate: "2024-12-01" },
   ],
 };
@@ -70,24 +72,41 @@ export const marqueeItems = [
 
 export type ProjectStatus = "RUNNING" | "DEPLOYED" | "EXPERIMENT" | "ARCHIVED";
 
-export const projects: {
+export interface ProjectItem {
   id: string;
   pid: string;
   title: string;
   status: ProjectStatus;
+  impactBadge?: string;
   description: string;
+  architecture?: string[];
+  highlights?: string[];
   tags: string[];
   liveUrl?: string;
   repoUrl?: string;
   rotation: number;
-}[] = [
+}
+
+export const projects: ProjectItem[] = [
   {
     id: "ai-agent-marketplace",
     pid: "PID_01",
     title: "AI_AGENT_MARKETPLACE",
     status: "DEPLOYED",
+    impactBadge: "160+ Active Pilot Users",
     description:
-      "A company-wide SaaS marketplace for AI agents, MCP servers, and tools with authentication and RBAC. The pilot reached 160+ registered users and supports sales, research, presentation, and audio workflows.",
+      "A company-wide SaaS marketplace for AI agents, MCP servers, and tools with authentication and RBAC. Supports sales, research, presentation, and audio workflows.",
+    architecture: [
+      "React Frontend ➔ FastAPI Gateway",
+      "PostgreSQL DB with PgBouncer Pooling",
+      "Custom Model Context Protocol (MCP) Tools",
+      "Docker Compose & AWS EC2 Deployment"
+    ],
+    highlights: [
+      "160+ registered enterprise users in initial rollout",
+      "Modular MCP tool orchestration for custom agent capabilities",
+      "Role-Based Access Control (RBAC) & JWT auth security"
+    ],
     tags: ["AI Agents", "MCP", "FastAPI", "React", "PostgreSQL"],
     rotation: -1.5,
   },
@@ -96,8 +115,20 @@ export const projects: {
     pid: "PID_02",
     title: "AUTONOMOUS_TEST_AGENT",
     status: "DEPLOYED",
+    impactBadge: "Zero Manual QA Smoke Tests",
     description:
-      "A browser-driven testing agent that autonomously runs smoke and functional tests against the AI marketplace, reducing repetitive manual QA work.",
+      "A browser-driven testing agent that autonomously runs smoke and functional tests against the AI marketplace, eliminating repetitive QA tasks.",
+    architecture: [
+      "Playwright Headless Browser Agent",
+      "LLM Test-Step Planner & Dynamic Selectors",
+      "Automated Visual Regressions & Log Capture",
+      "CI/CD Webhook Trigger Integration"
+    ],
+    highlights: [
+      "Replaced manual smoke test suites with autonomous agent runs",
+      "Self-healing DOM element locator strategies",
+      "Generates detailed bug trace logs and DOM snapshots"
+    ],
     tags: ["Playwright", "AI Agents", "Browser Automation", "Testing"],
     rotation: 1,
   },
@@ -106,8 +137,20 @@ export const projects: {
     pid: "PID_03",
     title: "HR_AUTOMATION_PLATFORM",
     status: "DEPLOYED",
+    impactBadge: "1,000+ Candidates Reached",
     description:
-      "An independently owned HR workflow that finds stale candidate resumes, triggers WhatsApp outreach, and syncs new resumes back to internal systems. It has reached 1,000+ candidates.",
+      "An independently owned HR workflow that finds stale candidate resumes, triggers WhatsApp outreach, and syncs new resumes back to internal systems.",
+    architecture: [
+      "FastAPI Async Background Jobs",
+      "Meta WhatsApp Business API Integration",
+      "PostgreSQL Candidate Database & Webhooks",
+      "Automated Token & Rate Limiting System"
+    ],
+    highlights: [
+      "Contacted over 1,000+ candidates automatically",
+      "Built usage tracking & token rate management layer",
+      "Eliminated manual recruiter phone/email outreach bottleneck"
+    ],
     tags: ["FastAPI", "WhatsApp API", "Webhooks", "Scheduling", "PostgreSQL"],
     rotation: -0.75,
   },
@@ -116,8 +159,20 @@ export const projects: {
     pid: "PID_04",
     title: "NEWS_INTELLIGENCE_AGENT",
     status: "RUNNING",
+    impactBadge: "Multimodal Audio & Video",
     description:
-      "An in-development agent that transforms the latest news into each user's preferred format: concise text, audio, video, an explainer, or a podcast.",
+      "An agent that ingests breaking technical news and automatically transforms it into personalized user formats: concise text, audio scripts, or podcasts.",
+    architecture: [
+      "RSS & News API Web Crawler",
+      "LangChain / LLM Summarization Pipeline",
+      "Text-to-Speech (TTS) Audio Generation Engine",
+      "FastAPI Endpoint & Content Streamer"
+    ],
+    highlights: [
+      "Multi-format generation (Bulletins, Audio podcasts, Q&A)",
+      "Automated deduplication and topic clustering algorithm",
+      "Personalized daily digest subscription delivery"
+    ],
     tags: ["AI Agents", "Multimodal", "Content Generation", "FastAPI"],
     rotation: 1.25,
   },
@@ -126,8 +181,20 @@ export const projects: {
     pid: "PID_05",
     title: "FITNESS_WELLBEING_APP",
     status: "RUNNING",
+    impactBadge: "Mobile Pilot & Push-Up Alarms",
     description:
-      "A self-directed, Strava-style fitness and daily-assistant app in pilot, combining workout tools, push-up-gated alarms, habits, notes, lists, and a secure personal vault.",
+      "A mobile fitness & assistant app combining Strava-style workout logging, push-up-gated alarm triggers, daily habit tracking, and encrypted vaults.",
+    architecture: [
+      "React Native Cross-Platform App",
+      "Device Camera / Pose Estimation Sensors",
+      "Encrypted SQLite Local Storage Vault",
+      "Background Alarm & Sensor Triggers"
+    ],
+    highlights: [
+      "Camera-based push-up verification before alarm silences",
+      "Offline-first secure storage for notes and vault",
+      "Interactive workout progress graphs & metrics"
+    ],
     tags: ["React Native", "Mobile", "Fitness", "Product Design"],
     rotation: -1,
   },
@@ -136,8 +203,20 @@ export const projects: {
     pid: "PID_06",
     title: "SME_BUSINESS_PLATFORM",
     status: "DEPLOYED",
+    impactBadge: "Multi-Branch RBAC & Webstore",
     description:
-      "An end-to-end multi-branch business platform with inventory, customer ordering, vendor approvals, role-based access, marketing automation, and a drag-and-drop webstore builder.",
+      "An end-to-end multi-branch platform with inventory, ordering, vendor approvals, role-based security, marketing automation, and webstore builder.",
+    architecture: [
+      "Node.js / Express REST API Microservices",
+      "React Dashboard & Drag-and-Drop Webstore Builder",
+      "PostgreSQL Multi-Tenant Branch Database",
+      "Nginx Reverse Proxy & AWS ECR Containers"
+    ],
+    highlights: [
+      "Multi-branch inventory synchronization across locations",
+      "Custom drag-and-drop webstore builder for non-tech merchants",
+      "Full role-based security model (Owner, Manager, Staff, Customer)"
+    ],
     tags: ["MERN", "PostgreSQL", "RBAC", "Meta APIs", "DevOps"],
     rotation: 0.75,
   },
